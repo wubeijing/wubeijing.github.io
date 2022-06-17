@@ -118,7 +118,7 @@ footer.sticky-bottom { border-top: 1px solid #e8e8e8; padding-top: 40px; padding
 .projects .grid-item a { color: black; text-decoration: none; }
 .projects .grid-item a:hover { color: var(--global-theme-color); }
 .projects .card { margin-top: 7.5px; margin-bottom: 7.5px; }
-.projects .card img { width: 50px; }
+.projects .card img { width: 100%; }
 .projects .card-title img { height: 2rem; width: 2rem; display: inline-block; vertical-align: top; margin-right: 4px; }
 
 .publications { margin-top: 2rem; }
