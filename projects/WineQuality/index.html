@@ -131,7 +131,7 @@
                 <hr />
 
                 <h4 id="project-description">Project Description</h4>
-                <p>By better understanding how sweetness affects the quality perception of wine experts, wineries may be able to tailor their wines better based on popular customer tastes and increase sales. This project aims to study the difference in the level of residual sugar, the main chemical component that adds sweetness, and its effects on wine quality. Residual sugar is the amount of sugar from natural grapes that’s leftover in a bottle of wine after the fermentation process is completed. During the fermentation process, sugar is converted to alcohol with the help of yeast, and winemakers can choose at which point to terminate the fermentation process before all the sugar gets consumed. This decision could affect both the levels of residual sugar and the alcohol concentration. Therefore, the research question is <b><i>Does sweeter non-sparkling wine lead to better quality review by wine experts?</i></b></p>
+                <p>By better understanding how sweetness affects the quality perception of wine experts, wineries may be able to tailor their wines better based on popular customer tastes and hencd increasing sales. This project aims to study the difference in the level of residual sugar, the main chemical component that adds sweetness, and its effects on wine quality. Residual sugar is the amount of sugar from natural grapes that is leftover in a bottle of wine after the fermentation process is completed. During the fermentation process, sugar is converted to alcohol with the help of yeast, and winemakers can choose at which point to terminate the fermentation process before all the sugar gets consumed. This decision could affect both the levels of residual sugar and the alcohol concentration. Therefore, the research question is <b><i>Does sweeter non-sparkling wine lead to better quality review by wine experts?</i></b></p>
 
                 <h4 id="skills">Skills</h4>
                 <p>Statistics, Causal Thoery, Linear Regression</p>
@@ -140,8 +140,11 @@
                 <p>R</p>
                 <hr />
 
-                <h4 id="algorithm">Minimax Algorithm</h4>
-                <p>Minimax is a backtracking algorithm used in decision making and game theory to find the optimal move for a player, assuming opponent player plays optimally. It is widely used in two player turn-based games. The two players are called maximizer and minimizer. The goal of players is to minimize the opponent’s benefit and maximize self-benefit. The Minimax algorithm conducts a depth-first search to explore the complete game tree and then proceeds down to the leaf node of the tree, then backtracks the tree using recursive calls.
+                <h4 id="algorithm">Statistical vs. Practical Significance</h4>
+                <p>Despite our proposed causal theory that sweeter non-sparkling wines lead to better quality review by wine experts, analysis of our dataset showed the opposite. In fact, residual sugar concentration has a negative and significant effect (&beta<sub>1</sub> = -0.019, p < 0.01) on wine quality as reviewed by wine experts when fitting test dataset using our linear regression model
+                    <math>
+                        quality = &beta<sub>0</sub> + &beta<sub>1</sub>(residual sugar) + &beta<sub>2</sub>(citric acid) + &beta<sub>3</sub>(citric acid<sup>2</sup>) + &beta<sub>4</sub>(climates) + &beta<sub>5</sub>(NaCl) + &epsilon
+                    </math>
 
 
                 </p>
