@@ -149,12 +149,126 @@
                 <br><br>First, there exists an inherent taste difference between red and white wine samples. Furthermore, within our dataset, white and red wines’ physicochemical signals and qualities were collected in separate processes. Therefore, differences in the quality metric or calibration of machines could give contradictory results for red and white wines, and we felt it would be inconsistent to combine the two datasets and analyze them together.
                 <br><br>Secondly, we find that the range in residual sugar in the red wine dataset is quite limited. With the maximum residual sugar concentration for the red wine dataset being 15.5 g/L, these red wines can at most be categorized as dry wines as shown in the figure below.
                 <br><br>
-                <img src="https://github.com/wubeijing/ResidualSugarWineQuality/src/RS_in_wine.png" alt="Residual Sugar Content in Wine" class="card-img-top">
+                <img src="../../assets/img/wine_quality_RS_in_wine.png" alt="Residual Sugar Content in Wine" class="card-img-top">
                 <br><br>Therefore, this dataset is not suited for us to extrapolate any of our analysis into the sweet or medium sweet red wine categories because such red wine samples do not exist in our dataset.
                 <br><br>As such, we decide to examine causal relationships between levels of residual sugar in non-sparkling white wine and wine quality, and specifically, we tailored our research question to the below:
                 <br><b><i>Does sweeter non-sparkling white wines lead to better quality review by wine experts?</i></b>
                 </p>
 
+                <h4 id="algorithm">Theoretical Causal Theory</h4>
+                <p>Based on our literature review, we have created a causal pathway below that details the relationship of all of our 11 physicochemical signals. The direction of effect between two variables is presented by the directional arrows of the arrow and each two signals’ relationship is denoted by either an increasing effect correlation (+) or a decreasing effect (-).
+                <br><br>In the absence of oxygen, through the process of fermentation, yeast converts the natural sugar in grapes into alcohol and carbon dioxide (CO<sub>2</sub>). The more sugar there is in the grapes, the higher the potential alcohol level of wine if the yeast are allowed to carry out fermentation to completion. This, in turn, means that the less residual sugar is left in wine. In other words, the earlier the winemakers stop fermentation, the more residual sugar will be left, and hence the sweeter the wine is.
+                <br><br>Opposite to the relationship between fermentation duration and residual sugar concentration, usually the longer that fermentation goes on, the more sugar is converted into alcohol, resulting in higher alcohol content in wine. Therefore, there exists a 2-way relationship between residual sugar concentration and alcohol in wine, that is, the higher the alcohol content, the lower the residual sugar concentration. Since the goal of our project is to examine the causal relationship between residual sugar concentration and quality, we think that alcohol needs to be excluded from our models as it will mask the effect of residual sugar concentration on quality.
+                <br><br>In addition, both alcohol content and level of residual sugar affect wine density. As alcohol has a lower density than water, the higher the alcohol content, the lower the wine density. The higher the residual sugar concentration, the higher the wine density. Because of this correlation, density is excluded from our model building process.
+                <br><br>During the process of fermentation, acetic acid, which is considered the main component of volatile acidity in wine, is produced as a byproduct through oxidation, and wines that have long fermentation periods generally accumulate higher levels of acetic acid. Excess acetic acid can contribute to the wine fault, giving the wine a “nail polish remover” smell and vinegar taste. Therefore, high acetic acid conentration is considered to have a negative effect on wine quality.
+                <br><br>Citric acid is another acid that has many uses in wine production. Citric acid is often added to the finished wines to give a “fresh” flavor, and hence has a positive effect on wine quality. However, citric-sugar co-metabolism can increase the formation of volatile acid (i.e., acetic acid) in wine, which can affect the wine aroma and wine quality negatively. We hypothesize that there should be an optimal citric acid concentration in wine, where it will add freshness to wine without giving a vinegar taste.
+                <br><br>Sulfur Dioxide is a common chemical compound used in winemaking as a preservative and an antibacterial agent. Total sufur dioxide concentration is the portion of sulfur dioxide that is free in the wine (i.e., free sufur dioxide concentration), plus the portion that is bound to other chemicals in the wine. Free sufur dioxide concentration and pH of the wine determines how much sulfur dioxide is available in the active form to help protect the wine from oxidation and spoilage. Sulfur dioxide’s antimicrobial and antioxidant efficiency in wine depends on a wide range of factors, of which the most important ones are pH, residual sugar concentration, and alcohol content. The lower the pH, the less sulfur dioxide needed; the higher the alcohol content, the less sulfur dioxide; the lower the level of residual sugar, the less sulfur dioxide needed. Because sulfur dioxide also affects wine quality, residual sugar is a cofounder in this relationship. To simplify our model building process, sulfur dioxide is left out.
+                <br><br>pH is a method of determining the strength of acid in a solution. The effect of pH on wine quality can be explained by a combination of all acids. pH is not independent from acid concentrations, and if we include pH in our model, it will mask other effects of various acids on quality. Therefore, we decided to exclude pH in our model building process.
+                <br><br>Wine grapes from cooler climates have a higher level of tartaric acid concentration, typically 6 g/L and higher. Wine grapes from warmer climates generally have a lower level of tartaric acid concentration, around 1 - 2 g/L. Therefore, we transform the variable tartaric acid concentration, which is a continuous measure of tartaric acid concentration, to a categorical control variable "climates" to depict the climate the wine grapes are from. Climates is set to be equal to cooler if tartaric acid concentration is greater or equal to 6 g/L and warmer if it is less than 6 g/L. Similarly, the sodium chloride concentration is highly correlated with the soil and the water condition of certain geographical regions. We have added sodium chloride concentration as a control variable as well into our hypothesized models.
+                <br><br>The error term, epsilon, is everything else that could affect wine quality and that is independent of any of the other variables in our model. This could include factors such as oak and barrel aging process, the harvest of the grapes, capping method, wine storage, and transportation. We also assume that there are no factors in the error term that directly affect both the outcome variable and the explanatory variables.
+                <br><br>
+                <table style="width:100%">
+                    <caption>Physicochemical Parameters for White Wines</caption>
+                    <tr>
+                        <td>Variable</td>
+                        <td>Measure</td>
+                        <td>Unit</td>
+                        <td>Description</td>
+                        <td>Range</td>
+                        <td>Stdev</td>
+                    </tr>
+                    <tr>
+                        <td>fixed acidity</td>
+                        <td>Tartaric acid conc.</td>
+                        <td>g/L</td>
+                        <td>One of the three main acids found in wine grapes. Plays prominent role in maintaining chemical stability of the wine, wine’s color, and influencing the taste of the finished product</td>
+                        <td>3.8 - 14.2</td>
+                        <td>0.844</td>
+                    </tr>
+                    <tr>
+                        <td>volatile acidity</td>
+                        <td>Acetic acid conc.</td>
+                        <td>g/L</td>
+                        <td>Associated with “acetification” of wine and is responsible for the sour taste of vinegar</td>
+                        <td>0.08 - 1.10</td>
+                        <td>0.101</td>
+                    </tr>
+                    <tr>
+                        <td>citric acid</td>
+                        <td>Citric acid conc.</td>
+                        <td>g/L</td>
+                        <td>Add “freshness” and flavor to wine</td>
+                        <td>0.00 - 1.66</td>
+                        <td>0.121</td>
+                    </tr>
+                    <tr>
+                        <td>residual sugar</td>
+                        <td>Residual sugar conc.</td>
+                        <td>g/L</td>
+                        <td>From natural grape sugars leftover in wine after the alcoholic fermentation finishes. 10 g/L ~ 1% sweetness</td>
+                        <td>0.6 - 65.8</td>
+                        <td>5.072</td>
+                    </tr>
+                    <tr>
+                        <td>chlorides</td>
+                        <td>Sodium chloride conc.</td>
+                        <td>g/L</td>
+                        <td>Reflects local soil and water conditions (i.e., distance between vineyard and coast)</td>
+                        <td>0.009 - 0.346</td>
+                        <td>0.022</td>
+                    </tr>
+                    <tr>
+                        <td>free sulfur dioxide</td>
+                        <td>Free SO<sub>2</sub> conc.</td>
+                        <td>mg/L</td>
+                        <td>antioxidant and antimicrobial, making it an effective preservative for wine. Amount depends on pH. Higher pH, less free SO<sub>2</sub></td>
+                        <td>2 - 289</td>
+                        <td>17.077</td>
+                    </tr>
+                    <tr>
+                        <td>total sulfur dioxide</td>
+                        <td>Total SO<sub>2</sub> conc.</td>
+                        <td>mg/L</td>
+                        <td>Free SO<sub>2</sub> and those Abound to other chemicals in wine</td>
+                        <td>9 - 440</td>
+                        <td>42.498</td>
+                    </tr>
+                    <tr>
+                        <td>density</td>
+                        <td>density</td>
+                        <td>g/L</td>
+                        <td>Determined by concentration of alcohol, sugar, glycerol, and other dissolved solids</td>
+                        <td>0.9871 - 1.0390</td>
+                        <td>0.003</td>
+                    </tr>
+                    <tr>
+                        <td>pH</td>
+                        <td>pH</td>
+                        <td>N/A</td>
+                        <td>A measure of acidity. Lower pH indicates higher acid levels</td>
+                        <td>2.720 - 3.820</td>
+                        <td>0.151</td>
+                    </tr>
+                    <tr>
+                        <td>sulphates</td>
+                        <td>Potassium sulphate conc.</td>
+                        <td>g/L</td>
+                        <td>Acts as an antioxidant, removing oxygen suspended in the wine, which slows down aging</td>
+                        <td>0.22 - 1.08</td>
+                        <td>0.114</td>
+                    </tr>
+                    <tr>
+                        <td>alcohol</td>
+                        <td>% vol. alcohol</td>
+                        <td>%</td>
+                        <td>Alcohol content in wine only changes during fermentation</td>
+                        <td>8.0 - 14.2</td>
+                        <td>1.231</td>
+                    </tr>
+                  </table>
+
+
+                </p>
 
                 <h4 id="algorithm">Statistical vs. Practical Significance</h4>
                 <p>We obtained the coefficient estimate of the effect of residual sugar on wine quality to be -0.014 for the base linear regression model with a p-value less than 0.001, indicating that for every unit increase in gram per Liter (g/L) of residual sugar, there will be an approximate decrease of 0.014 in expert rated wine quality.
