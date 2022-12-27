@@ -44,6 +44,23 @@
         gtag('config', 'UA-162315295-1');
     </script>
     <!-- End of Google Analytics code ID -->
+
+    <style>
+        table {
+            border: 1px solid black;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        th, td {
+            border: 1px solid black;
+            text-align: left;
+            padding: 2px;
+        }
+        
+        tr:nth-child(even) {background-color: #f2f2f2;}
+    </style>
+
 </head>
 
 <body class="fixed-top-nav">
@@ -149,7 +166,7 @@
                 <br><br>First, there exists an inherent taste difference between red and white wine samples. Furthermore, within our dataset, white and red wines’ physicochemical signals and qualities were collected in separate processes. Therefore, differences in the quality metric or calibration of machines could give contradictory results for red and white wines, and we felt it would be inconsistent to combine the two datasets and analyze them together.
                 <br><br>Secondly, we find that the range in residual sugar in the red wine dataset is quite limited. With the maximum residual sugar concentration for the red wine dataset being 15.5 g/L, these red wines can at most be categorized as dry wines as shown in the figure below.
                 <br><br>
-                <img src="../../assets/img/wine_quality_RS_in_wine.png" alt="Residual Sugar Content in Wine" class="card-img-top">
+                <a href="https://github.com/wubeijing/ResidualSugarWineQuality.git" target="_blank"><img src="../../assets/img/wine_quality_RS_in_wine.png" class="card-img-top" /></a>
                 <br><br>Therefore, this dataset is not suited for us to extrapolate any of our analysis into the sweet or medium sweet red wine categories because such red wine samples do not exist in our dataset.
                 <br><br>As such, we decide to examine causal relationships between levels of residual sugar in non-sparkling white wine and wine quality, and specifically, we tailored our research question to the below:
                 <br><b><i>Does sweeter non-sparkling white wines lead to better quality review by wine experts?</i></b>
