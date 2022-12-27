@@ -140,10 +140,26 @@
                 <p>R</p>
                 <hr />
 
+                <h4 id="algorithm">Our Dataset</h4>
+                <p>Our research leverages <a href="http://www3.dsi.uminho.pt/pcortez/wine/" target="_blank" style="color:#2C6BAC; font-weight:bold">data from the UC Irvine Machine Learning Repository</a>, which contains 4,898 records of exported white and 1,599 records of red wines from the Vinho Verde region located in northern Portugal. The dataset includes data for common physicochemical properties recorded by machines and also sensory assessment evaluated by humans. The wine quality assessments were recorded on a Likert scale of 0 to 10 with 0 being very bad and 10 being excellent. Since the assessment process was different for white and red wine, recorded data were kept separately in two datasets. Both the physiochemical properties and the sensory assessment were conducted during the wine certification process, which is a common process for export goods in order to help countries stratify wines into different categories for ease of pricing.
+                </p>
+                
+                <h4 id="algorithm">Revision of Research Question - Why White Wine Only?</h4>
+                <p>We choose to not combine the white and red wine datasets, and evaluate only the white wine dataset, for two reasons detailed below.
+                <br><br>First, there exists an inherent taste difference between red and white wine samples. Furthermore, within our dataset, white and red wines’ physicochemical signals and qualities were collected in separate processes. Therefore, differences in the quality metric or calibration of machines could give contradictory results for red and white wines, and we felt it would be inconsistent to combine the two datasets and analyze them together.
+                <br><br>Secondly, we find that the range in residual sugar in the red wine dataset is quite limited. With the maximum residual sugar concentration for the red wine dataset being 15.5 g/L, these red wines can at most be categorized as dry wines as shown in the figure below.
+                <br><br>
+                <img src="https://github.com/wubeijing/ResidualSugarWineQuality/src/RS_in_wine.png" alt="Residual Sugar Content in Wine" class="card-img-top">
+                <br><br>Therefore, this dataset is not suited for us to extrapolate any of our analysis into the sweet or medium sweet red wine categories because such red wine samples do not exist in our dataset.
+                <br><br>As such, we decide to examine causal relationships between levels of residual sugar in non-sparkling white wine and wine quality, and specifically, we tailored our research question to the below:
+                <br><b><i>Does sweeter non-sparkling white wines lead to better quality review by wine experts?</i></b>
+                </p>
+
+
                 <h4 id="algorithm">Statistical vs. Practical Significance</h4>
                 <p>We obtained the coefficient estimate of the effect of residual sugar on wine quality to be -0.014 for the base linear regression model with a p-value less than 0.001, indicating that for every unit increase in gram per Liter (g/L) of residual sugar, there will be an approximate decrease of 0.014 in expert rated wine quality.
                 <br><br>It is also important to evaluate the practical significance of our results. Given that with a large sample size of over 100 samples in both the train and test dataset, our coefficient estimate is 0.014, which is one hundredth of a unit in Likert scale. Based on our model, wine with no residual sugar will receive a 5.883 grade in rating by wine experts. With an unit increase of g/L for residual sugar, our model tells us that we will observe a -0.014 decrease in rating. The typical range of residual sugar in wine that ranges from 0 g/L to 120 g/L. This means that wine quality effect due to residual sugar would decrease 1.68 grade in rating when increasing residual sugar to 120 g/L. The drastic changes in the manufacturing process to achieve a 120 g/L to 0 g/L reduction in residual sugar will at most lead to a 1.68 degree of increase in wine quality rating. This leads us to conclude that although our model was able to establish a significant causal relationship between residual sugar and wine quality, the effect size is really small, hence no practical significance can be evaluated.
-                <br>We understand that it is easier to achieve statistical significant results given our large sample and small standard error. Therefore, the reason that our coefficient estimate is significant could simply be due to having a large sample size.
+                <br><br>We understand that it is easier to achieve statistical significant results given our large sample and small standard error. Therefore, the reason that our coefficient estimate is significant could simply be due to having a large sample size.
                 </p>
 
                 <h4 id="algorithm">Discussion</h4>
