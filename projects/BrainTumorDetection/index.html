@@ -115,7 +115,7 @@
         <div class="post">
 
             <header class="post-header">
-                <h2 id="tic-tac-toe"><a href="https://github.com/wubeijing/BrainTumorDetection.git" target="_blank">Brain Tumor Detection</a></h2>
+                <h2 id="tic-tac-toe"><a href="https://github.com/wubeijing/BrainTumorDetection.git" target="_blank">Brain Tumor Detection - Detecting Brain Tumors in Patients Given Brain Scan Imagery</a></h2>
                 <p>
                     <strong>Machine Learning | Python </strong><br><i>April 2022</i>
                 </p>
@@ -130,28 +130,39 @@
                 </p>
                 <hr />
 
-                <h4 id="project-description">Project Description</h4>
-                <p></p>
+                <h4 id="project-description">Motivation and Dataset</h4>
+                <p>Brain tumors are the second leading cause of cancer death in children under 15 and second fastest growing cause of cancer death for people over 65. Brain tumor is a collection of abnormal cells in the brain. It can be non-cancerous or cancerous. If it originates in the brain, it is a primary brain tumor and many primary brain tumors are non-cancerous. If it is metastasized to brain because cancer cells spread to the brain from another organ, it is seconadary. Even if a brain tumor is non-cancerous, as you can imagine, it still can be dangerous because it can damage and compress parts of the brain, causing severe dysfunction. Depend on the size and location of the brain tumor, symptoms of brain tumors can range from headaches, seizures, to change in personality, memory or speech.
+                <br><br>Diagnosis of a brain tumor usually begins with a detailed neuro exam, folllowed by imaging tests and biopsy of a small tissue sample. Imaging tests can be CT scan, MRI, or X-rays. Imaging is extremely important because it shows whether there is a tumor, and if there is, its approximate size and location. The images can also help plan treatment. Integration of machine learning technology into medical imaging and radiology has many advantages such as improving the accurarcy and speed of diagnosis, clinical decision making, and this will lead to better outcomes.
+                <br><br>Our dataset is <a href="https://www.kaggle.com/datasets/preetviradiya/brian-tumor-dataset?select=Brain+Tumor+Data+Set" target="_blank" style="color:#2C6BAC; font-weight:bold">a Brain tumor X-ray image dataset from Kaggle</a> for classification. It contains a total of 4600 images. It is relatively balanced, with about 55% images with brain tumor, and 45% are healthy brain. These images are stored in a variety of formats, sizes, and color schemes.                
+                </p>
 
                 <h4 id="skills">Skills</h4>
-                <p>Machine Learning Algorithm, </p>
+                <p>Machine Learning Algorithm (KNN, Naive Bayes, Random Forest, Gradient Boosted Classification Tree, Logistic Regression, Stacked Ensemble) </p>
 
                 <h4 id="tools">Tools</h4>
-                <p>Python, NumPy, scikit-learn, scikit-image, OpenCV</p>
+                <p>Python, NumPy, scikit-learn, scikit-image, OpenCV, pillow</p>
                 <hr />
 
-                <h4 id="algorithm">Minimax Algorithm</h4>
-                <p>Minimax is a backtracking algorithm used in decision making and game theory to find the optimal move for a player, assuming opponent player plays optimally. It is widely used in two player turn-based games. The two players are called maximizer and minimizer. The goal of players is to minimize the opponent’s benefit and maximize self-benefit. The Minimax algorithm conducts a depth-first search to explore the complete game tree and then proceeds down to the leaf node of the tree, then backtracks the tree using recursive calls.
-
+                <h4 id="algorithm">Automated Image Preprocessing and Model Development Pipeline</h4>
+                <p>We implemented a series of 6 image preprocessing functions, all of which have the same goal, that is, to preserve and maximize useful features in the images and to decrease computational costs.
+                    <ul>
+                        <li>The <b>image standardization function</b> modifies images to 2D 256 by 256 in size and in greyscale.</li>
+                        <li>The <b>blurring function</b> reduces image noise and details using a custom Gaussian or box filter.</li>
+                        <li>The <b>pooling function</b> applies an aggregation function to a chunk of an image, and the resulting image is the aggregate value of the chunk, which is smaller in size compared to the original, but with important features intensified and irrelevant information discarded.</li>
+                        <li>The <b>binarization function</b> converts grayscale images into black and white, which sharpens the contours of objects in the image.</li>
+                        <li>The <b>cropping function</b> removes unnecessary padding around the image while preserve the aspect ratio and minimizes sensitivity to relative scan size.</li>
+                        <li>The <b>resizing function</b> further reduces image size using an image processing package called pillow. It does pooling, blurring, and binarization of the image in a single step, in which a really high dimensional image is squeezed down to a lower dimensional representation.</li>
+                    </ul>
+                
 
                 </p>
                 <hr />
 
                 <p>
-                    <a href="https://github.com/wubeijing/tictactoe.git" target="_blank"><img src="../../assets/img/tic_tac_toe_demo.gif" class="card-img-top" /></a>
+                    
                 </p>
                 <hr />
-                <p>See the complete project in my <a href="https://github.com/wubeijing/tictactoe.git" target="_blank">GitHub repository.</a></p>
+                <p>See the complete project in my <a href="https://github.com/wubeijing/BrainTumorDetection.git" target="_blank">GitHub repository.</a></p>
 
             </article>
         </div>
