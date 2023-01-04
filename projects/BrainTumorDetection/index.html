@@ -44,6 +44,23 @@
         gtag('config', 'UA-162315295-1');
     </script>
     <!-- End of Google Analytics code ID -->
+
+    <style>
+        table {
+            border: 1px solid black;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        th, td {
+            border: 1px solid black;
+            text-align: left;
+            padding: 4px;
+        }
+        
+        tr:nth-child(even) {background-color: #f2f2f2;}
+    </style>
+
 </head>
 
 <body class="fixed-top-nav">
@@ -171,6 +188,7 @@
                 <h4 id="algorithm">Model Evaluation</h4>
                 <p>
                 <table style="width:100%">
+                    <caption>Optimal Model Parameters and Performance</caption>
                     <tr>
                         <th>Group</th>
                         <th>Model</th>
@@ -219,6 +237,78 @@
                         <th>0.945</th>
                     </tr>
                 </table>
+
+                <table style="width:100%">
+                    <caption>Test Data Evaluation</caption>
+                    <tr>
+                        <th>Model</th>
+                        <th>True Healthy, Predicted Healthy</th>
+                        <th>True Healthy, Predicted Cancer</th>
+                        <th>True Cancer, Predicted Healthy</th>
+                        <th>True Cancer, Predicted Healthy</th>
+                        <th>F1 Score</th>
+                        <th>Accuracy</th>
+                        <th>True Cancer Detection Rate</th>
+                        <th>False Positive Rate</th>
+                    </tr>
+                    <tr>
+                        <th>KNN</th>
+                        <th>628</th>
+                        <th>18</th>
+                        <th>11</th>
+                        <th>723</th>
+                        <th>0.9803</th>
+                        <th>0.9790</th>
+                        <th>0.985</th>
+                        <th>0.028</th>
+                    </tr>
+                    <tr>
+                        <th>Bernoulli Naive Bayes</th>
+                        <th>188</th>
+                        <th>458</th>
+                        <th>69</th>
+                        <th>665</th>
+                        <th>0.716</th>
+                        <th>0.618</th>
+                        <th>0.906</th>
+                        <th>0.709</th>
+                    </tr>
+                    <tr>
+                        <th>Gaussian Naive Bayes</th>
+                        <th>272</th>
+                        <th>374</th>
+                        <th>99</th>
+                        <th>635</th>
+                        <th>0.729</th>
+                        <th>0.657</th>
+                        <th>0.865</th>
+                        <th>0.579</th>
+                    </tr>
+                    <tr>
+                        <th>GBCT</th>
+                        <th>612</th>
+                        <th>34</th>
+                        <th>16</th>
+                        <th>718</th>
+                        <th>0.966</th>
+                        <th>0.964</th>
+                        <th>0.978</th>
+                        <th>0.053</th>
+                    </tr>
+                    <tr>
+                        <th>Logistic Regression</th>
+                        <th>596</th>
+                        <th>50</th>
+                        <th>23</th>
+                        <th>711</th>
+                        <th>0.947</th>
+                        <th>0.951</th>
+                        <th>0.969</th>
+                        <th>0.077</th>
+                    </tr>
+                </table>
+
+
                 </p>
 
                 <hr />
