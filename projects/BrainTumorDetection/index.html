@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Beijing Wu | Project | Tic Tac Toe</title>
-    <meta name="description" content="Beijing Wu | Project | Tic Tac Toe">
+    <title>Beijing Wu | Project | Brain Tumor Detection</title>
+    <meta name="description" content="Beijing Wu | Project | Brain Tumor Detection">
 
     <!-- Bootstrap & MDB -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha512-MoRNloxbStBcD8z3M/2BmnT+rg4IsMxPkXaGh2zD6LGNNFE80W3onsAhRcMAMrSoyWL9xD7Ert0men7vR8LUZg==" crossorigin="anonymous">
@@ -153,9 +153,12 @@
                         <li>The <b>cropping function</b> removes unnecessary padding around the image while preserve the aspect ratio and minimizes sensitivity to relative scan size.</li>
                         <li>The <b>resizing function</b> further reduces image size using an image processing package called pillow. It does pooling, blurring, and binarization of the image in a single step, in which a really high dimensional image is squeezed down to a lower dimensional representation.</li>
                     </ul>
-                
-
+                Here is an example to apply these preprocessing functions sequentially. On the top row, the original image was standardized to 256 x 256 in greyscale, then blurred using a 5 x 5 Gaussian filter, followed by max pooling with a pool size of 2 x 2, and the image size was now reduced to 128 x 128. The image was then binarized and cropped, and resized to 16 x 16 pixel in size. On the bottom row, the original image was processed using the same settings but in different order.
+                <br><br>
+                <a href="https://github.com/wubeijing/BrainTumorDetection.git" target="_blank"><img src="../../assets/img/brain_tumor_detection_img_preprocessing.png" class="card-img-top" /></a>
+                <br><br>The processed images look quite different depending on the order of applied preprocessing functions. How do we know in which order we should apply these functions? Are all of these preprocessing steps needed since some of the steps took much longer than others?
                 </p>
+
                 <hr />
 
                 <p>
