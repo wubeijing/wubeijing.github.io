@@ -184,7 +184,7 @@
                 <br><br>pH is a method of determining the strength of acid in a solution. The effect of pH on wine quality can be explained by a combination of all acids. pH is not independent from acid concentrations, and if we include pH in our model, it will mask other effects of various acids on quality. Therefore, we decided to exclude pH in our model building process.
                 <br><br>Wine grapes from cooler climates have a higher level of tartaric acid concentration, typically 6 g/L and higher. Wine grapes from warmer climates generally have a lower level of tartaric acid concentration, around 1 - 2 g/L. Therefore, we transform the variable tartaric acid concentration, which is a continuous measure of tartaric acid concentration, to a categorical control variable "climates" to depict the climate the wine grapes are from. Climates is set to be equal to cooler if tartaric acid concentration is greater or equal to 6 g/L and warmer if it is less than 6 g/L. Similarly, the sodium chloride concentration is highly correlated with the soil and the water condition of certain geographical regions. We have added sodium chloride concentration as a control variable as well into our hypothesized models.
                 <br><br>The error term, epsilon, is everything else that could affect wine quality and that is independent of any of the other variables in our model. This could include factors such as oak and barrel aging process, the harvest of the grapes, capping method, wine storage, and transportation. We also assume that there are no factors in the error term that directly affect both the outcome variable and the explanatory variables.
-                <br><br>
+                <br>
                 <table style="width:100%">
                     <caption style="caption-side: top;">Physicochemical Parameters for White Wines</caption>
                     <tr>
@@ -284,8 +284,7 @@
                         <td style="text-align: center">1.231</td>
                     </tr>
                 </table>
-
-
+                <br><br>
                 </p>
 
                 <h4 id="algorithm">Statistical vs. Practical Significance</h4>

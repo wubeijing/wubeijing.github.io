@@ -178,11 +178,12 @@
                 <br>
                     <ol type="1">
                         <li>Given preprocessed labeled data in any model type, what are the optimal hyperparameter settings that will allow that model to best generalize to out of sample data, which is measured via out of sample F1 score? We chose F1 score because we wanted to not only measure the model's ability to detect tumor in these images, but also make sure the detection is accurate.
-                        <br>To identify an optimal model in this setting, we built a custom pipeline that applies user speficied preprocessing steps to the original images, executes grid search to find optimal hyperparameter settings for a given model, and conducts a threshold analysis for predicted probability threshold that maximizes optimal model performance.</li>
+                        <br><br>To identify an optimal model in this setting, we built a custom pipeline that applies user speficied preprocessing steps to the original images, executes grid search to find optimal hyperparameter settings for a given model, and conducts a threshold analysis for predicted probability threshold that maximizes optimal model performance.</li>
                         <br>
                         <li>What sequence of preprocessing steps enable an optimal model to generalize the best to out of sample data? Different preprocessing combinations have fundamentally different impact on the image, which ultimately impact model performance. We also wanted to avoid an one-size-fits-all approach because the preprocessing steps used to optimize a KNN model performance, for example, would be fundamentally different compared to the treatment used to optimize a logistic regression model performance.
-                        <br>We developed a greedy decision algorithm as a wrapper around the pipeline described above. First, we evaluated the impact of resizing to ensure our models were trained on images containing as much valuable information as possible. Without incorporating as much valuable information, models would generalize poorly. Or the models would take too long to train because the original images contained too much information. After identifying image size that optimized model performance, user specified preprocessing methods were evaluated to see if the addtion of any of the treatment, given the resized images, would improve optimal model performance even further.</li>
+                        <br><br>We developed a greedy decision algorithm as a wrapper around the pipeline described above. First, we evaluated the impact of resizing to ensure our models were trained on images containing as much valuable information as possible. Without incorporating as much valuable information, models would generalize poorly. Or the models would take too long to train because the original images contained too much information. After identifying image size that optimized model performance, user specified preprocessing methods were evaluated to see if the addtion of any of the treatment, given the resized images, would improve optimal model performance even further.</li>
                     </ol>
+                <br><br>
                 </p>
 
                 <h4 id="algorithm">Model Evaluation</h4>
@@ -308,6 +309,7 @@
                         <th>0.077</th>
                     </tr>
                 </table>
+                <br><br>
                 </p>
 
                 <h4 id="algorithm">Stacked Ensemble</h4>
@@ -316,7 +318,7 @@
                 <br><br>This led to the second option of building a stacked ensemble model, where an additional layer of machine learning model would learn how to make predictions, given predictions from prior layer of base models. This approach allowed us to use machine learning to identify how to best combine our base models together.
                 <br><br>The "training data" for the additional layer of machine learning model was constructed as follows: each feature columns stored the out-of-sample predicited probabilities of the individual base models for each of the training examples, obtained via 5-fold cross validation process as specified by the model development pipeline. There were 4 columns total, 1 column per model (i.e., KNN, Gaussian Naive Bayes, GBCT, Logistic Regression). The labels were the original training labels from the dataset. This allowed us to capture the general behavior of each of the inidividual models alongside the true labels.
                 <br><br>With the newly constructed "training data", we developed the optimal final layer model to be a Gaussian Naive Bayes model. During training, this model directly learned the probability that each model made certain predictions given a label.
-                <br><br>
+                <br>
                 <table style="width:100%">
                     <caption style="caption-side: top;">Optimal Stack Using Training Data</caption>
                     <tr>
@@ -327,8 +329,8 @@
                     </tr>
                     <tr>
                         <th>Final Layer Gaussian Naive Bayes</th>
-                        <th style="text-align: left">var_smoothing=0.1</th>
-                        <th style="text-align: left">0.26</th>
+                        <th>var_smoothing=0.1</th>
+                        <th>0.26</th>
                         <th>0.98</th>
                     </tr>
                 </table>
@@ -359,11 +361,7 @@
                     </tr>
                 </table>
                 </p>
-                <hr />
 
-                <p>
-                    
-                </p>
                 <hr />
                 <p>See the complete project in my <a href="https://github.com/wubeijing/BrainTumorDetection.git" target="_blank">GitHub repository.</a></p>
 
