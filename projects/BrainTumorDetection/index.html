@@ -188,7 +188,7 @@
                 <h4 id="algorithm">Model Evaluation</h4>
                 <p>
                 <table style="width:100%">
-                    <caption style="caption-side: top;">Optimal Model Parameters and Performance</caption>
+                    <caption style="caption-side: top;">Optimal Model Parameters and Performance Using Training Data</caption>
                     <tr>
                         <th>Group</th>
                         <th>Model</th>
@@ -206,13 +206,13 @@
                     <tr>
                         <th rowspan="2" scope="rowgroup">Naive Bayes</th>
                         <th scope="row">Bernoulli Model</th>
-                        <th></th>
+                        <th style="text-align: left">var_smoothing=1e-11</th>
                         <th style="text-align: left">Resized to 128x128, normalized box filter blurring with filter kernal (3, 3), max pooling with pool size (8, 8)</th>
                         <th>0.716</th>
                     </tr>
                     <tr>
                         <th scope="row">Gaussian Model</th>
-                        <th></th>
+                        <th style="text-align: left">var_smoothing=1e-11</th>
                         <th style="text-align: left">Resized to 128x128, max pooling with pool size (16, 16)</th>
                         <th>0.729</th>
                     </tr>
@@ -237,7 +237,8 @@
                         <th>0.945</th>
                     </tr>
                 </table>
-
+                
+                <br>
                 <table style="width:100%">
                     <caption style="caption-side: top;">Test Data Evaluation</caption>
                     <tr>
@@ -307,10 +308,57 @@
                         <th>0.077</th>
                     </tr>
                 </table>
-
-
                 </p>
 
+                <h4 id="algorithm">Stacked Ensemble</h4>
+                <p>Each of the optimal model made vastly different assumptions, and ultimately learned different decision boundaries from the training data. While some models generalized better than others, all models learned valuable information. This led us to the question of <b><i>how to best combine the predictions of each model to deliver even more optimal results?</i></b>
+                <br><br>The first option is voting classifier, where the final layer model would make a classification according to the majority vote from each of the individual models. While it is an extremely intuitive process, it also introduces issues. For example, perhaps each of the inidividual models should not have the same weight in determining a final classification. However, to come up a method to adjust the weight for each individual model that is not manual, since there is infinite number of combinations can be applied, is not as simple.
+                <br><br>This led to the second option of building a stacked ensemble model, where an additional layer of machine learning model would learn how to make predictions, given predictions from prior layer of base models. This approach allowed us to use machine learning to identify how to best combine our base models together.
+                <br><br>The "training data" for the additional layer of machine learning model was constructed as follows: each feature columns stored the out-of-sample predicited probabilities of the individual base models for each of the training examples, obtained via 5-fold cross validation process as specified by the model development pipeline. There were 4 columns total, 1 column per model (i.e., KNN, Gaussian Naive Bayes, GBCT, Logistic Regression). The labels were the original training labels from the dataset. This allowed us to capture the general behavior of each of the inidividual models alongside the true labels.
+                <br><br>With the newly constructed "training data", we developed the optimal final layer model to be a Gaussian Naive Bayes model. During training, this model directly learned the probability that each model made certain predictions given a label.
+                <br><br>
+                <table style="width:100%">
+                    <caption style="caption-side: top;">Optimal Stack Using Training Data</caption>
+                    <tr>
+                        <th>Model</th>
+                        <th>Hyperparameters</th>
+                        <th>Threshold</th>
+                        <th>Cross Validated F1 Score</th>
+                    </tr>
+                    <tr>
+                        <th>Final Layer Gaussian Naive Bayes</th>
+                        <th style="text-align: left">var_smoothing=0.1</th>
+                        <th style="text-align: left">0.26</th>
+                        <th>0.98</th>
+                    </tr>
+                </table>
+                <br>
+                <table style="width:100%">
+                    <caption style="caption-side: top;">Test Data Evaluation Using Optimal Stack</caption>
+                    <tr>
+                        <th>Model</th>
+                        <th>True Healthy, Predicted Healthy (TN)</th>
+                        <th>True Healthy, Predicted Cancer (FP)</th>
+                        <th>True Cancer, Predicted Healthy (FN)</th>
+                        <th>True Cancer, Predicted Cancer (TP)</th>
+                        <th>F1 Score</th>
+                        <th>Accuracy</th>
+                        <th>True Cancer Detection Rate</th>
+                        <th>False Positive Rate</th>
+                    </tr>
+                    <tr>
+                        <th>Final Layer Gaussian Naive Bayes</th>
+                        <th>626</th>
+                        <th>20</th>
+                        <th>8</th>
+                        <th>726</th>
+                        <th>0.981</th>
+                        <th>0.98</th>
+                        <th>0.989</th>
+                        <th>0.031</th>
+                    </tr>
+                </table>
+                </p>
                 <hr />
 
                 <p>
@@ -326,7 +374,7 @@
     <!-- Footer -->
     <footer class="fixed-bottom">
         <div class="container mt-0">
-            &copy; Copyright 2022 Beijing Wu. Powered by <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>. Last updated: June 17, 2022.
+            &copy; Copyright 2022 Beijing Wu. Powered by <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>. Last updated: Jan 05, 2023.
         </div>
     </footer>
 </body>
