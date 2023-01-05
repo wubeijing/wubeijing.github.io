@@ -54,7 +54,7 @@
         
         th, td {
             border: 1px solid black;
-            text-align: left;
+            text-align: center;
             padding: 4px;
         }
         
@@ -199,41 +199,41 @@
                     <tr>
                         <th>Distance Based</th>
                         <th>KNN</th>
-                        <th>n_neighbor=1, p=1, weights=uniform</th>
-                        <th>Resized to 16x16</th>
+                        <th style="text-align: left">n_neighbor=1, p=1, weights=uniform</th>
+                        <th style="text-align: left">Resized to 16x16</th>
                         <th>0.9742</th>
                     </tr>
                     <tr>
                         <th rowspan="2" scope="rowgroup">Naive Bayes</th>
                         <th scope="row">Bernoulli Model</th>
                         <th></th>
-                        <th>Resized to 128x128, normalized box filter blurring with filter kernal (3, 3), max pooling with pool size (8, 8)</th>
+                        <th style="text-align: left">Resized to 128x128, normalized box filter blurring with filter kernal (3, 3), max pooling with pool size (8, 8)</th>
                         <th>0.716</th>
                     </tr>
                     <tr>
                         <th scope="row">Gaussian Model</th>
                         <th></th>
-                        <th>Resized to 128x128, max pooling with pool size (16, 16)</th>
+                        <th style="text-align: left">Resized to 128x128, max pooling with pool size (16, 16)</th>
                         <th>0.729</th>
                     </tr>
                     <tr>
                         <th rowspan="2" scope="rowgroup">Tree Based</th>
                         <th scope="row">Random Forest</th>
-                        <th>min_samples_leaf=3, n_estimators=500</th>
-                        <th>Resized to 32x32, Gaussian blur</th>
+                        <th style="text-align: left">min_samples_leaf=3, n_estimators=500</th>
+                        <th style="text-align: left">Resized to 32x32, Gaussian blur</th>
                         <th>0.9615</th>
                     </tr>
                     <tr>
                         <th scope="row">Gradient Boosted Classification Tree (GBCT)</th>
-                        <th>max_depth=4, n_estimators=500</th>
-                        <th>Resized to 16x16</th>
+                        <th style="text-align: left">max_depth=4, n_estimators=500</th>
+                        <th style="text-align: left">Resized to 16x16</th>
                         <th>0.9703</th>
                     </tr>
                     <tr>
                         <th>Linear Models</th>
                         <th scope="row">Logistic Regression</th>
-                        <th>C=0.001, penalty="l2", solvers="lbfgs"</th>
-                        <th>Resized to 256x256, max pooling with pool size (2, 2)</th>
+                        <th style="text-align: left">C=0.001, penalty="l2", solvers="lbfgs"</th>
+                        <th style="text-align: left">Resized to 256x256, max pooling with pool size (2, 2)</th>
                         <th>0.945</th>
                     </tr>
                 </table>
@@ -242,10 +242,10 @@
                     <caption>Test Data Evaluation</caption>
                     <tr>
                         <th>Model</th>
-                        <th>True Healthy, Predicted Healthy</th>
-                        <th>True Healthy, Predicted Cancer</th>
-                        <th>True Cancer, Predicted Healthy</th>
-                        <th>True Cancer, Predicted Healthy</th>
+                        <th>True Healthy, Predicted Healthy (TN)</th>
+                        <th>True Healthy, Predicted Cancer (FP)</th>
+                        <th>True Cancer, Predicted Healthy (FN)</th>
+                        <th>True Cancer, Predicted Cancer (TP)</th>
                         <th>F1 Score</th>
                         <th>Accuracy</th>
                         <th>True Cancer Detection Rate</th>
