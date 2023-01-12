@@ -152,7 +152,7 @@
                 <br><br>The goal of this project is to help airports with their operations by predicting flight delays, so the airports can be strategic with turnaround services such as aircraft refueling, restocking, baggage handling, air traffic control, and gate management. Using US domestic flight and weather data from 2015 to 2021, along with airport information, we predict departure flight delays two hours prior to planned departure time.
                 <br><br>We use F2-score, Matthews Correlation Coefficient (MCC), and balanced accuracy to evaluate our models' performance. These evaluation metrics are chosen to align with the business needs of our project. F2-score is a weighted harmonic mean of precision and recall, and it gives more weight to recall than to precision, which means false positives are considered not as bad as than false negatives. If a flight that is predicted to be delayed depatures on time (false positive), the airport will not have a substantial monetary loss, whereas if an actual delay is failed to be identified (false negative), it will have a cascading effect on subsequent flights, baggage handling, air traffic control, and gate management for the airport. 
                 <br><center><math>
-                    F<sub>2</sub> = 5 x (<box>precision x recall<over>4 x precision + recall</over></box>);
+                    F<sub>2</sub> = 5 x (precision x recall<over>4 x precision + recall);
                 </math></center>
                 </p>
 
