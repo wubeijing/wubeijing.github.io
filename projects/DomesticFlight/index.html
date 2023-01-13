@@ -187,12 +187,12 @@
                     <ul>
                         <li><b>Flight Dataset</b></li>
                         <br>This dataset contains information about domestic passenger flights on-time performance between 2015 - 2021. There are 107 features, of which the <b>DEP_DEL15 (departure delay 15 minutes or more)</b> is the target variable. DEP_DEL15 = 0 indicates that the flight is not delayed and DEP_DEL15 = 1 represents delayed flights. Based on EDA on a subset of 3 month flight data, around 3% of data is missing DEP_DEL15 feature, which indicates flight cancellations. We consider these indefinite delays. Around 30% of flights in the flight dataset depart delayed, suggesting significant class imbalancing issue.
-                        <br><br>The flight dataset contains a total of 2,806,942 row, of which 50% is duplicated. Therefore, duplicated rows are removed, resulting in a deduplicated flight dataset with 1,403,471 rows.
-                        <br>
+                        <br><br>In addition, the flight dataset contains 50% duplicated records, which are removed.
+                        <br><br>
                         <li><b>Weather Dataset</b></li>
                         <br>This dataset is collected from National Oceanic and Atmospheric Administration repository, with granular, high frequency weather information from monitoring weather stations all over the U.S. The dataset contains a large number of missing values, and columns with greater than 70% missing data are removed. 
                         <br><br>According to the Federal Aviation Administration, inclement weather, including thunderstorms, snowstorms, wind shear, icing, and fog, creates potentially hazardous conditions in the nation's airspace system. These conditions are, by far, the largest cause of flight delays. In an average year, inclement weather is the reason for nearly 70% of all delays. We thoroughly analyze the features in the weather data, and only features that are indicators of inclement weather are retained.
-                        <br>
+                        <br><br>
                         <li><b>Station Dataset</b></li>
                         <br>This dataset contains information of weather stations and distances between neighboring stations. Stations with distance_to_neighbor = 0 represent weather monitoring stations at the airport, and only these stations are retained.
                       </ul>
@@ -200,8 +200,44 @@
                 </p>
 
                 <h4 id="algorithm">Join Datasets</h4>
-                <p>
+                <p>For all datasets, columns containing greater than 70% missing data are removed. All datasets are cleaned before joining. Flight dataset contains 42,430,592 records. Weather dataset contains 3,056,388 records, and station dataset contains 16,689 records.
+                <br><br>Joining dataset is performed with the following join criteria: flight dataset left join with station dataset and left join with weather dataset on ICAO code in flight dataset = ICAO code in station dataset, on station id in station dataset = station id in weather dataset, on year in weather dataset = year in flight dataset. The following filtering criteria are followed: the difference between flight UTC timestamp and weather dataset timestamp should range between 2 (inclusive) and 5 hours prior flight departure time. The weather data is aggregated within a two hour window prior to prediction time. Depending on the weather features, aggregation can be average (i.e., rain fall volume), maximum (i.e., wind speed), or minimum (i.e., visibility). The flight UTC timestamp should always be greater than weather data timestamp. 
                 </p>
+
+                <h4 id="algorithm">Feature Engineering</h4>
+                <p>
+                    <table style="width:100%">
+                        <tr>
+                            <th>New Feature</th>
+                            <th>Description</th>
+                            <th>Data Type</th>
+                        </tr>
+                        <tr>
+                            <th>Carrier Category</th>
+                            <th style="text-align: left">There is a clear trend that certain airlines have higher percentage of delayed flights. Many of these airlines are considered low cost (JetBlue) or ultra-low cost (Spirit, Frontier) carriers while other airline carriers have fewer percentage of delayed flights. This new feature categorizes airlines into carriers. (Figure 1A, 1B)</th>
+                            <th>categorical</th>
+                        </tr>
+                        <tr>
+                            <th>Holidays: Pre- and Post-Holiday</th>
+                            <th style="text-align: left">Airline travel can be seasonal, and certain holidays have much heavier traffic. We create 3 binary indicators to indicate whether flight depature dates are a holiday, pre-holiday, or post-holiday.</th>
+                            <th>binary</th>
+                        </tr>
+                        <tr>
+                            <th>Airport Importance (PageRank)</th>
+                            <th style="text-align: left">Certain airports can be considered "travel hubs" and have more activities (and hence potentially more delays) than others. We use pagerank to find the importance of each airport, creating a new feature to indicate the importance of each flight's origin airport (i.e., how busy the airport is). (Figure 1C)</th>
+                            <th>numerical</th>
+                        </tr>
+                        <tr>
+                            <th>Prior Flight's Late Arrival</th>
+                            <th style="text-align: left">We believe there is a chaining effect of late arriving flights causing future delayed flights, and we hypothesize that this has the largest impact on flight departure delays. By tracking each flight's tail number, we create a binary feature that indicates whether the plane was arrived late prior depature. Based on our research, there can be room to "make up" for late arrival; therefore, only flights arriving late for more than 30 minutes are considered late enough to affect the next flight depature time. (Figure 1D)</th>
+                            <th>binary</th>
+                        </tr>
+                    </table>
+                <br>
+                Figure 1. New features
+                <br><a href="https://github.com/wubeijing/DomesticFlightDelayPredictions.git" target="_blank"><img src="../../assets/img/flight_delay_figure_1.png" class="card-img-top" /></a>
+                </p>
+
 
                 <hr />
                 <p>See the complete project in my <a href="https://github.com/wubeijing/DomesticFlightDelayPredictions.git" target="_blank">GitHub repository.</a></p>
@@ -213,7 +249,7 @@
     <!-- Footer -->
     <footer class="fixed-bottom">
         <div class="container mt-0">
-            &copy; Copyright 2022 Beijing Wu. Powered by <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>. Last updated: Jan 05, 2023.
+            &copy; Copyright 2022 Beijing Wu. Powered by <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>. Last updated: Jan 12, 2023.
         </div>
     </footer>
 </body>
