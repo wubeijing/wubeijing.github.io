@@ -154,8 +154,10 @@
                 <br><br>The goal of this project is to help airports with their operations by predicting flight delays, so the airports can be strategic with turnaround services such as aircraft refueling, restocking, baggage handling, air traffic control, and gate management. Using US domestic flight and weather data from 2015 to 2021, along with airport information, we predict departure flight delays two hours prior to planned departure time.
                 <br><br>We use F2-score, Matthews Correlation Coefficient (MCC), and balanced accuracy to evaluate our models' performance. These evaluation metrics are chosen to align with the business needs of our project. F2-score is a weighted harmonic mean of precision and recall, and it gives more weight to recall than to precision, which means false positives are considered not as bad as than false negatives. If a flight that is predicted to be delayed depatures on time (false positive), the airport will not have a substantial monetary loss, whereas if an actual delay is failed to be identified (false negative), it will have a cascading effect on subsequent flights, baggage handling, air traffic control, and gate management for the airport. 
                 <br><center>
-                    `F_(2) = 5 xx frac(text{precision} xx text{recall})(4 xx text{precision} + text{recall})`
+                    `F_(2) = 5 xx frac(text{precision} xx text{recall})(4 xx text{precision} + text{recall}) text{where} text{precision} = frac(text{TP})(text{TP} + text{FP}) text{and} text{recall} = frac(text{TP})(text{TP} + text{FN})`
                 </center>
+                
+                <br>Matthews Correlation Coefficient (MCC) represents the confusion matrix as a single number, and helps with imbalanced data. MCC takes into account the proportion of each class. This metric ranges from -1 to 1, and -1 indicates the model is predicting the opposite class from the actual value, 0 is similar to random guessing, and 1 indicates a perfect classification.
                 </p>
 
                 <h4 id="skills">Skills</h4>
@@ -166,7 +168,7 @@
                 <hr />
 
                 <h4 id="algorithm">Automated Image Preprocessing and Model Development Pipeline</h4>
-                <p>We implemented a series of 6 image preprocessing functions, all of which have the same goal, that is, to preserve and maximize useful features in the images and to decrease computational costs.
+                <p>We implemented a series of 6 image preprocessing functions, all of which have the same goal, that is, to preserve and maximize useful features in the images and to decrease computational costs. 
                     
                 </p>
 
