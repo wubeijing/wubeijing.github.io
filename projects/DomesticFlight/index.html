@@ -157,15 +157,15 @@
                 <h4 id="project-description">Evaluation Metrics to Measure Success</h4>
                 <p>We use F2-score, Matthews Correlation Coefficient (MCC), and balanced accuracy to evaluate our models' performance. These evaluation metrics are chosen to align with the business needs of our project. 
                 <br><br><b>F2-score</b> is a weighted harmonic mean of precision and recall, and it gives more weight to recall than to precision, which means false positives are considered not as bad as than false negatives. If a flight that is predicted to be delayed depatures on time (false positive), the airport will not have a substantial monetary loss, whereas if an actual delay is failed to be identified (false negative), it will have a cascading effect on subsequent flights, baggage handling, air traffic control, and gate management for the airport. 
-                <br><center>
+                <br><br><center>
                     `F_(2) = 5 xx frac(text{precision} xx text{recall})(4 xx text{precision} + text{recall}) text{ where } text{precision} = frac(text{TP})(text{TP} + text{FP}) text{ and } text{recall} = frac(text{TP})(text{TP} + text{FN})`
                 </center>
                 <br><b>Matthews Correlation Coefficient (MCC)</b> represents the confusion matrix as a single number, and helps with imbalanced data. MCC takes into account the proportion of each class. This metric ranges from -1 to 1, and -1 indicates the model is predicting the opposite class from the actual value, 0 is similar to random guessing, and 1 indicates a perfect classification.
-                <br><center>
+                <br><br><center>
                     `text{MCC} = frac(text{TP} xx text{TN} - text{FP} xx text{FN})(sqrt ((text{TP} + text{FP})(text{TP} + text{FN})(text{TN} + text{FP})(text{TN} + text{FN})))`
                 </center>
                 <br><b>Balanced Accuracy</b>: Since the data is imbalanced, a normal accuracy metric will be high just by predicting the majority class, which is misleading. Instead, we choose to use balanced accuracy, which takes into account different class sizes.
-                <br><center>
+                <br><br><center>
                     `text{Balanced Accuracy} = frac(text{sensitivity} + text{specificity})(2} text{ where } text{sensitivity} = frac(text{TP})(text{TP} + text{FN}) text{ and } text{specificity} = frac(text{TN})(text{TN} + text{FP})`
                 </center>
                 </p>
@@ -177,134 +177,20 @@
                 <p>Python, PySpark, Databricks</p>
                 <hr />
 
-                <h4 id="algorithm">Automated Image Preprocessing and Model Development Pipeline</h4>
-                <p>We implemented a series of 6 image preprocessing functions, all of which have the same goal, that is, to preserve and maximize useful features in the images and to decrease computational costs. 
-                    
+                <h4 id="algorithm">Datasets</h4>
+                <p>The primary datasets are domestic flight and airport information data from the U.S. Department of Transportation (DOT), weather data from the National Oceanic and Atmospheric Administration repository, and weather stations data from the U.S. DOT. <a href="https://www.transtats.bts.gov/Fields.asp?gnoyr_VQ=FGJ&flf_gnoyr_anzr=g_bagVZR_eRcbegVaT&h5r4_gnoyr_anzr=er2146v0t%20Pn44vr4%20b0-gvzr%20cr4s14zn0pr%20(EMLK-24r5r06)&lrn4_V0s1=E&Sv456_lrn4=EMLK&Yn56_lrn4=FDFE&en6r_V0s1=D&S4r37r0pB=Z106uyB&Qn6n_S4r37r0pB=N007ny,d7n46r4yB,Z106uyB" target="_blank" style="color:#2C6BAC; font-weight:bold">The flight dataset</a> contains information about domestic passenger flights on-time performance between 2015 - 2021. There are 107 features, of which the <b>DEP_DEL15 (departure delay 15 minutes or more)</b> is the target variable. The weather dataset contains hourly weather condition information from 2015 - 2021. The weather station dataset contains weather stations' information and neighboring stations along with distance between stations.
+                <br><br>To supplement, we used airline codes, holidays, and airline operation category datasets. <a href="https://www.bts.gov/topics/airlines-and-airports/airline-codes" target="_blank" style="color:#2C6BAC; font-weight:bold">The airline codes data</a> provides airline names and associated IATA and ICAO codes. <a href="https://www.transtats.bts.gov/holidaydelay.asp" target="_blank" style="color:#2C6BAC; font-weight:bold">The holidays data</a> lists holiday travel seasons as defined by the air travel industry. <a href="https://www.airlinepilotcentral.com/airlines" target="_blank" style="color:#2C6BAC; font-weight:bold">The airline operation category data</a> categorizes airline carriers by their operation cost structures.
                 </p>
 
-                <h4 id="algorithm">Model Evaluation</h4>
+                <h4 id="algorithm">Exploratory Data Analysis (EDA)</h4>
                 <p>
-                <table style="width:100%">
-                    <caption style="caption-side: top;">Optimal Model Parameters and Performance Using Training Data</caption>
-                    <tr>
-                        <th>Group</th>
-                        <th>Model</th>
-                        <th>Hyperparameters</th>
-                        <th>Preprocessing</th>
-                        <th>Cross Validated F1 Score</th>
-                    </tr>
-                    <tr>
-                        <th>Distance Based</th>
-                        <th>KNN</th>
-                        <th style="text-align: left">n_neighbor=1, p=1, weights="uniform"</th>
-                        <th style="text-align: left">Resized to 16x16</th>
-                        <th>0.9742</th>
-                    </tr>
-                    <tr>
-                        <th rowspan="2" scope="rowgroup">Naive Bayes</th>
-                        <th scope="row">Bernoulli Model</th>
-                        <th style="text-align: left">var_smoothing=1e-11</th>
-                        <th style="text-align: left">Resized to 128x128, normalized box filter blurring with filter kernal (3, 3), max pooling with pool size (8, 8)</th>
-                        <th>0.716</th>
-                    </tr>
-                    <tr>
-                        <th scope="row">Gaussian Model</th>
-                        <th style="text-align: left">var_smoothing=1e-11</th>
-                        <th style="text-align: left">Resized to 128x128, max pooling with pool size (16, 16)</th>
-                        <th>0.729</th>
-                    </tr>
-                    <tr>
-                        <th rowspan="2" scope="rowgroup">Tree Based</th>
-                        <th scope="row">Random Forest</th>
-                        <th style="text-align: left">min_samples_leaf=3, n_estimators=500</th>
-                        <th style="text-align: left">Resized to 32x32, Gaussian blur</th>
-                        <th>0.9615</th>
-                    </tr>
-                    <tr>
-                        <th scope="row">Gradient Boosted Classification Tree (GBCT)</th>
-                        <th style="text-align: left">max_depth=4, n_estimators=500</th>
-                        <th style="text-align: left">Resized to 16x16</th>
-                        <th>0.9703</th>
-                    </tr>
-                    <tr>
-                        <th>Linear Models</th>
-                        <th scope="row">Logistic Regression</th>
-                        <th style="text-align: left">C=0.001, penalty="l2", solvers="lbfgs"</th>
-                        <th style="text-align: left">Resized to 256x256, max pooling with pool size (2, 2)</th>
-                        <th>0.945</th>
-                    </tr>
-                </table>
-                
-                <br>
-                <table style="width:100%">
-                    <caption style="caption-side: top;">Test Data Evaluation</caption>
-                    <tr>
-                        <th>Model</th>
-                        <th>True Healthy, Predicted Healthy (TN)</th>
-                        <th>True Healthy, Predicted Cancer (FP)</th>
-                        <th>True Cancer, Predicted Healthy (FN)</th>
-                        <th>True Cancer, Predicted Cancer (TP)</th>
-                        <th>F1 Score</th>
-                        <th>Accuracy</th>
-                        <th>True Cancer Detection Rate</th>
-                        <th>False Positive Rate</th>
-                    </tr>
-                    <tr>
-                        <th>KNN</th>
-                        <th>628</th>
-                        <th>18</th>
-                        <th>11</th>
-                        <th>723</th>
-                        <th>0.9803</th>
-                        <th>0.9790</th>
-                        <th>0.985</th>
-                        <th>0.028</th>
-                    </tr>
-                    <tr>
-                        <th>Bernoulli Naive Bayes</th>
-                        <th>188</th>
-                        <th>458</th>
-                        <th>69</th>
-                        <th>665</th>
-                        <th>0.716</th>
-                        <th>0.618</th>
-                        <th>0.906</th>
-                        <th>0.709</th>
-                    </tr>
-                    <tr>
-                        <th>Gaussian Naive Bayes</th>
-                        <th>272</th>
-                        <th>374</th>
-                        <th>99</th>
-                        <th>635</th>
-                        <th>0.729</th>
-                        <th>0.657</th>
-                        <th>0.865</th>
-                        <th>0.579</th>
-                    </tr>
-                    <tr>
-                        <th>GBCT</th>
-                        <th>612</th>
-                        <th>34</th>
-                        <th>16</th>
-                        <th>718</th>
-                        <th>0.966</th>
-                        <th>0.964</th>
-                        <th>0.978</th>
-                        <th>0.053</th>
-                    </tr>
-                    <tr>
-                        <th>Logistic Regression</th>
-                        <th>596</th>
-                        <th>50</th>
-                        <th>23</th>
-                        <th>711</th>
-                        <th>0.947</th>
-                        <th>0.951</th>
-                        <th>0.969</th>
-                        <th>0.077</th>
-                    </tr>
-                </table>
+                    <ul>
+                        <li><b>Flight Dataset</b></li>
+                        <br>This dataset contains information about domestic passenger flights on-time performance between 2015 - 2021. There are 107 features, of which the <b>DEP_DEL15 (departure delay 15 minutes or more)</b> is the target variable. DEP_DEL15 = 0 indicates that the flight is not delayed and DEP_DEL15 = 1 represents delayed flights. Based on EDA on a subset of 3 month flight data, around 3% of data is missing DEP_DEL15 feature, which indicates flight cancellations. We consider these indefinite delays. Around 30% of flights in the flight dataset depart delayed, suggesting significant class imbalancing issue.
+                        <br><br>The flight dataset contains a total of 2,806,942 row, of which 50% is duplicated. Therefore, duplicated rows are removed, resulting in a deduplicated flight dataset with 1,403,471 rows.
+                        <li><b>Weather Dataset</b></li>
+                        <li><b>Station Dataset</b></li>
+                      </ul>
                 <br>
                 </p>
 
