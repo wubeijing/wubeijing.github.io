@@ -188,13 +188,20 @@
                         <li><b>Flight Dataset</b></li>
                         <br>This dataset contains information about domestic passenger flights on-time performance between 2015 - 2021. There are 107 features, of which the <b>DEP_DEL15 (departure delay 15 minutes or more)</b> is the target variable. DEP_DEL15 = 0 indicates that the flight is not delayed and DEP_DEL15 = 1 represents delayed flights. Based on EDA on a subset of 3 month flight data, around 3% of data is missing DEP_DEL15 feature, which indicates flight cancellations. We consider these indefinite delays. Around 30% of flights in the flight dataset depart delayed, suggesting significant class imbalancing issue.
                         <br><br>The flight dataset contains a total of 2,806,942 row, of which 50% is duplicated. Therefore, duplicated rows are removed, resulting in a deduplicated flight dataset with 1,403,471 rows.
+                        <br>
                         <li><b>Weather Dataset</b></li>
+                        <br>This dataset is collected from National Oceanic and Atmospheric Administration repository, with granular, high frequency weather information from monitoring weather stations all over the U.S. The dataset contains a large number of missing values, and columns with greater than 70% missing data are removed. 
+                        <br><br>According to the Federal Aviation Administration, inclement weather, including thunderstorms, snowstorms, wind shear, icing, and fog, creates potentially hazardous conditions in the nation's airspace system. These conditions are, by far, the largest cause of flight delays. In an average year, inclement weather is the reason for nearly 70% of all delays. We thoroughly analyze the features in the weather data, and only features that are indicators of inclement weather are retained.
+                        <br>
                         <li><b>Station Dataset</b></li>
+                        <br>This dataset contains information of weather stations and distances between neighboring stations. Stations with distance_to_neighbor = 0 represent weather monitoring stations at the airport, and only these stations are retained.
                       </ul>
                 <br>
                 </p>
 
-                
+                <h4 id="algorithm">Join Datasets</h4>
+                <p>
+                </p>
 
                 <hr />
                 <p>See the complete project in my <a href="https://github.com/wubeijing/DomesticFlightDelayPredictions.git" target="_blank">GitHub repository.</a></p>
