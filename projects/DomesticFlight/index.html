@@ -154,6 +154,13 @@
                 <br><br>The goal of this project is to help airports with their operations by predicting flight delays, so the airports can be strategic with turnaround services such as aircraft refueling, restocking, baggage handling, air traffic control, and gate management. Using US domestic flight and weather data from 2015 to 2021, along with airport information, we predict departure flight delays two hours prior to planned departure time.
                 </p>
 
+                <h4 id="skills">Skills</h4>
+                <p>Machine Learning At Scale</p>
+
+                <h4 id="tools">Tools</h4>
+                <p>Python, PySpark, Databricks</p>
+                <hr />
+
                 <h4 id="project-description">Evaluation Metrics to Measure Success</h4>
                 <p>We use F2-score, Matthews Correlation Coefficient (MCC), and balanced accuracy to evaluate our models' performance. These evaluation metrics are chosen to align with the business needs of our project. 
                 <br><br><b>F2-score</b> is a weighted harmonic mean of precision and recall, and it gives more weight to recall than to precision, which means false positives are considered not as bad as than false negatives. If a flight that is predicted to be delayed depatures on time (false positive), the airport will not have a substantial monetary loss, whereas if an actual delay is failed to be identified (false negative), it will have a cascading effect on subsequent flights, baggage handling, air traffic control, and gate management for the airport. 
@@ -169,13 +176,6 @@
                     `text{Balanced Accuracy} = frac(text{sensitivity} + text{specificity})(2} text{ where } text{sensitivity} = frac(text{TP})(text{TP} + text{FN}) text{ and } text{specificity} = frac(text{TN})(text{TN} + text{FP})`
                 </center>
                 </p>
-
-                <h4 id="skills">Skills</h4>
-                <p>Machine Learning At Scale</p>
-
-                <h4 id="tools">Tools</h4>
-                <p>Python, PySpark, Databricks</p>
-                <hr />
 
                 <h4 id="algorithm">Datasets</h4>
                 <p>The primary datasets are domestic flight and airport information data from the U.S. Department of Transportation (DOT), weather data from the National Oceanic and Atmospheric Administration repository, and weather stations data from the U.S. DOT. <a href="https://www.transtats.bts.gov/Fields.asp?gnoyr_VQ=FGJ&flf_gnoyr_anzr=g_bagVZR_eRcbegVaT&h5r4_gnoyr_anzr=er2146v0t%20Pn44vr4%20b0-gvzr%20cr4s14zn0pr%20(EMLK-24r5r06)&lrn4_V0s1=E&Sv456_lrn4=EMLK&Yn56_lrn4=FDFE&en6r_V0s1=D&S4r37r0pB=Z106uyB&Qn6n_S4r37r0pB=N007ny,d7n46r4yB,Z106uyB" target="_blank" style="color:#2C6BAC; font-weight:bold">The flight dataset</a> contains information about domestic passenger flights on-time performance between 2015 - 2021. There are 107 features, of which the <b>DEP_DEL15 (departure delay 15 minutes or more)</b> is the target variable. The weather dataset contains hourly weather condition information from 2015 - 2021. The weather station dataset contains weather stations' information and neighboring stations along with distance between stations.
